@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>com.elgato.numberdisplay PI</title>
+    <link rel="stylesheet" href="sdpi.css">
+    <script src="common.js"></script>
+</head>
+
+<body>
+    <div class="sdpi-wrapper">
+        <div type="select" class="sdpi-item">
+            <div class="sdpi-item-label">Change Value</div>
+            <select class="sdpi-item-value select setvalueSelect" onchange="sendValueToPlugin(Number(event.target.value), 'setValue')">
+                <option selected value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+        <div type="range" class="sdpi-item">
+            <div class="sdpi-item-label">Change Value</div>
+            <div class="sdpi-item-value range">
+                <input class="setvalueSlider" type="range" min="0" max="9" value="0" oninput="sendValueToPlugin(Number(event.target.value), 'setValue')">
+            </div>
+        </div>
+        <div type="select" class="sdpi-item">
+            <div class="sdpi-item-label">Background</div>
+            <select class="sdpi-item-value select" onchange="sendValueToPlugin(event.target.value, 'background-image')">
+                <option selected value="actionDefaultImage">Original Background</option>
+                <option value="actionDefaultImage_red">Red Background</option>
+                <option value="actionDefaultImage_blue">Blue Background</option>
+                <option value="actionDefaultImage_yellow">Yellow Background</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        var pluginAction = null,
+            uuid = '',
+            aValueSlider = document.querySelectorAll('.setvalueSlider'),
+            oValueSelector = document.querySelector(".setvalueSelect");
+
+        if ($SD) {
+            $SD.on('connected', function (jsonObj) {
+                uuid = jsonObj['uuid'];
+                if (jsonObj['plugin']) {
+                    pluginAction = jsonObj.plugin['action'];
+                }
+            });
+        };
+
+        /** you can also use ES6 syntax like so:
+        *
+        *   if ($SD) $SD.on('connected', (jsonObj) => { uuid=jsonObj.uuid }));
+        *    
+        */
+
+        function sendValueToPlugin(value, param) {
+
+            // console.log("SENDING VALUE TO PLUGIN: ", value, uuid, pluginAction);
+            if (param === 'setValue') {
+
+                aValueSlider && Array.prototype.forEach.call(aValueSlider, function (ctl) {
+                    ctl.value = value;
+                })
+
+                oValueSelector && Array.prototype.forEach.call(oValueSelector.options, function (o) {
+                    const val = Math.round(value);
+                    if (o.value !== val) {
+                        oValueSelector.value = val;
+                    }
+                })
+            }
+
+            if ($SD && $SD.connection) {
+                var payload = {};
+                if (param) {
+                    payload[param] = value;
+                }
+                $SD.api.sendToPlugin(uuid, pluginAction, payload);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
