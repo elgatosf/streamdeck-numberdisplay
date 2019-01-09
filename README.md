@@ -6,12 +6,15 @@
 
 `NumberDisplay` is a plugin that displays a number chosen by the user. This plugin demonstrates how to create a custom Property Inspector and how to pass values from Property Inspector's input controls to the plugin.
 
-Features:
+
+# Features
 
 - code written in Javascript
 - cross-platform (macOS, Windows)
 - Property Inspector with multiple UI elements
 - localized
+
+![](screenshot.png)
 
 
 # Installation
