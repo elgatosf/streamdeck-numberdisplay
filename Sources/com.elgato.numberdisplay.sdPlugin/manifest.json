@@ -15,6 +15,7 @@
       "UUID": "com.elgato.numberdisplay.action"
     }
   ],
+  "SDKVersion": 2,
   "Author": "Elgato",
   "CodePath": "index.html",
   "Description": "This lets you display a value chosen by the user",
@@ -32,5 +33,9 @@
       "Platform": "windows",
       "MinimumVersion": "10"
     }
-  ]
+  ],
+  "Software": 
+    {
+        "MinimumVersion" : "4.1"
+    }
 }
