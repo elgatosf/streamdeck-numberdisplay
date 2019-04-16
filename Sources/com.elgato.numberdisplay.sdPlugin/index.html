@@ -83,7 +83,7 @@
 			pluginUUID = inPluginUUID
 
 			// Open the web socket
-			websocket = new WebSocket("ws://localhost:" + inPort);
+			websocket = new WebSocket("ws://127.0.0.1:" + inPort);
 
 			function registerPlugin(inPluginUUID) {
 				var json = {

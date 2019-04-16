@@ -764,7 +764,7 @@ const StreamDeck = (function () {
                 websocket = null;
             };
 
-            websocket = new WebSocket('ws://localhost:' + inPort);
+            websocket = new WebSocket('ws://127.0.0.1:' + inPort);
 
             websocket.onopen = function () {
                 var json = {
