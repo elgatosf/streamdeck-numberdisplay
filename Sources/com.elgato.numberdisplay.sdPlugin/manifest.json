@@ -21,6 +21,8 @@
   "Description": "This lets you display a value chosen by the user",
   "Name": "Number Display",
   "Icon": "pluginIcon",
+  "Category": "Number Display",
+  "CategoryIcon": "hash",
   "URL": "https://www.elgato.com/gaming/stream-deck",
   "PropertyInspectorPath": "numberdisplay_pi.html",
   "Version": "1.4",
